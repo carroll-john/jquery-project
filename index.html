@@ -13,7 +13,16 @@
 </head>
 
 <body>
-<script src="/Users/jc/github/jquery-project/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="/Users/jc/github/jquery-project/node_modules/jquery/dist/jquery.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $("#addbutton").on("click", function() {
+        $.getJSON("/json/cats.json", function(json) {
+          $(".message").html(JSON.stringify(json));
+        });
+      });
+    });
+  </script>
   <div class="container">
     <div class="row">
       <div class="col-sm-6">
@@ -42,7 +51,7 @@
   </div>
 
   <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-6 message">
       <button type="button" id="addButton" class="btn-primary" onclick="addClick;()">
       Add Product
     </button>
