@@ -78,7 +78,7 @@
     verse = verse.toLowerCase();
     var url = verse + '.txt';
 
-    fetch(/Users/jc/github/jquery-project/API/).then(function(response) {
+    fetch(/jc/github/jquery-project/API).then(function(response) {
       response.text().then(function(text) {
         poemDisplay.textContent = text;
       });
