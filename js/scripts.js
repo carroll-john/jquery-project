@@ -1,5 +1,7 @@
 $(document).ready(function() {
-  $(".trigger").click(function() {
-    $(".overlay").slideToggle();
+  $("#addButton").on("click", function() {
+    $.getJSON("http://fakerestapi.azurewebsites.net", function(json) {
+      $(".message").html(JSON.stringify(json));
+    });
   });
 });
