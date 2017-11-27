@@ -65,9 +65,81 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed: SyntaxError: Unexpected token (73:0)\n\n\u001b[0m \u001b[90m 71 | \u001b[39m  console\u001b[33m.\u001b[39mlog(error)\u001b[33m;\u001b[39m\n \u001b[90m 72 | \u001b[39m})\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 73 | \u001b[39m\u001b[33m<\u001b[39m\u001b[33mdd\u001b[39m\u001b[33m>\u001b[39m\u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33mdd\u001b[39m\u001b[33m>\u001b[39m\n \u001b[90m    | \u001b[39m\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n");
+"use strict";
+
+
+quote();
+
+function quote() {
+  $.ajax({
+    url: 'http://api.forismatic.com/api/1.0/',
+    jsonp: 'jsonp',
+    dataType: 'jsonp',
+    data: {
+      method: 'getQuote',
+      lang: 'en',
+      format: 'jsonp'
+    },
+    success: function success(response) {
+      $('#quote').html(response.quoteText);
+      $('#author').html(response.quoteAuthor);
+    }
+  });
+}
+
+$('#quoteButton').on('click', function () {
+  quote();
+});
+
+window.twttr = function (d, s, id) {
+  var js,
+      fjs = d.getElementsByTagName(s)[0],
+      t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = 'https://platform.twitter.com/widgets.js';
+  fjs.parentNode.insertBefore(js, fjs);
+
+  t._e = [];
+  t.ready = function (f) {
+    t._e.push(f);
+  };
+
+  return t;
+}(document, 'script', 'twitter-wjs');
+
+//fetch example of API call
+
+function createNode(element) {
+  return document.createElement(element);
+}
+
+function append(parent, el) {
+  return parent.appendChild(el);
+}
+
+var ul = document.getElementById('authors');
+var url = 'https://randomuser.me/api/?results=10';
+fetch(url).then(function (resp) {
+  return resp.json();
+}).then(function (data) {
+  var authors = data.results;
+  return authors.map(function (author) {
+    var li = createNode('li'),
+        img = createNode('img'),
+        span = createNode('span');
+    img.src = author.picture.medium;
+    span.innerHTML = author.name.first + ' ' + author.name.last;
+    append(li, img);
+    append(li, span);
+    append(ul, li);
+  });
+}).catch(function (error) {
+  console.log(error);
+});
 
 /***/ })
 /******/ ]);

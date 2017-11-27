@@ -1,6 +1,5 @@
 module.exports = {
   entry: './js/scripts.js',
-  import 'bootstrap';
   output: {
     filename: 'bundle.js'
   },
@@ -17,5 +16,15 @@ module.exports = {
         }
       }
     ]
-  }
-};
+    },
+  plugins: [
+    new webpack.ProvidePlugin({
+    $: "jquery",
+    jQuery: "jquery",
+    "window.jQuery": "jquery"
+  })
+]
+}
+
+
+  
